@@ -1,19 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#111166"
-    tools:context=".MainActivity">
+package app.hamasaki.rucara.sound4
 
-    <ImageView
-        android:id="@+id/drumImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/drum_image" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+import android.media.MediaPlayer
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.MotionEvent
+import androidx.constraintlayout.widget.ConstraintSet
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val drumSound =MediaPlayer.create(this, R.raw.drum_sound)
+
+        drumImage.setOnTouchListener { view, event ->
+
+
+
+
+            if (event.action == MotionEvent.ACTION_DOWN){
+
+                drumImage.setImageResource(R.drawable.drum_playing_image)
+
+                drumSound.seekTo(0)
+                
+
+                drumSound.start()
+
+            }
+            else if (event.action == MotionEvent.ACTION_UP){
+
+                    drumImage.setImageResource(R.drawable.drum_image)
+
+            }
+
+            true
+
+            }
+
+        }
+
+
+    }
+
